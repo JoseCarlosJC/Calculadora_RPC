@@ -1,3 +1,11 @@
+union calc_res switch (int error) {
+   case 0:
+      double resultado; /* Si no hay error devolvemos el resultado */
+   
+   default:
+      void; 
+}
+
 program CALCULADORA {
    version CALC_VER {
       double SUMA(double, double) = 1;
