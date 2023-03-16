@@ -8,9 +8,9 @@ union calc_res switch (int error) {
 
 program CALCULADORA {
    version CALC_VER {
-      double SUMA(double, double) = 1;
-      double RESTA(double, double) = 2;
-      double MULTIPLICA(double, double) = 3;
-      double DIVIDE(double, double) = 4;
+      calc_res SUMA(double, double) = 1;
+      calc_res RESTA(double, double) = 2;
+      calc_res MULTIPLICA(double, double) = 3;
+      calc_res DIVIDE(double, double) = 4;
    } = 1;
 } = 0x20000001;
