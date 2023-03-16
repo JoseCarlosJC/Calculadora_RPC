@@ -4,7 +4,7 @@ union calc_res switch (int error) {
    
    default:
       void; 
-}
+};
 
 program CALCULADORA {
    version CALC_VER {
