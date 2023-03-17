@@ -6,7 +6,55 @@
 #include "calculadora.h"
 
 bool_t
+xdr_calc_res (XDR *xdrs, calc_res *objp)
+{
+	register int32_t *buf;
+
+	 if (!xdr_int (xdrs, &objp->error))
+		 return FALSE;
+	switch (objp->error) {
+	case 0:
+		 if (!xdr_double (xdrs, &objp->calc_res_u.resultado))
+			 return FALSE;
+		break;
+	default:
+		break;
+	}
+	return TRUE;
+}
+
+bool_t
 xdr_suma_1_argument (XDR *xdrs, suma_1_argument *objp)
+{
+	 if (!xdr_double (xdrs, &objp->arg1))
+		 return FALSE;
+	 if (!xdr_double (xdrs, &objp->arg2))
+		 return FALSE;
+	return TRUE;
+}
+
+bool_t
+xdr_resta_1_argument (XDR *xdrs, resta_1_argument *objp)
+{
+	 if (!xdr_double (xdrs, &objp->arg1))
+		 return FALSE;
+	 if (!xdr_double (xdrs, &objp->arg2))
+		 return FALSE;
+	return TRUE;
+}
+
+bool_t
+xdr_multiplica_1_argument (XDR *xdrs, multiplica_1_argument *objp)
+{
+	 if (!xdr_double (xdrs, &objp->arg1))
+		 return FALSE;
+	 if (!xdr_double (xdrs, &objp->arg2))
+		 return FALSE;
+	return TRUE;
+}
+
+bool_t
+xdr_divide_1_argument (XDR *xdrs, divide_1_argument *objp)
 {
 	 if (!xdr_double (xdrs, &objp->arg1))
 		 return FALSE;
