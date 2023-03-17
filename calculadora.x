@@ -1,9 +1,8 @@
 union calc_res switch (int error) {
    case 0:
       double resultado; /* Si no hay error devolvemos el resultado */
-   
    default:
-      void; 
+      void; /* Hay error: en este caso división por 0 */
 };
 
 program CALCULADORA {

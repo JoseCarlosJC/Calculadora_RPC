@@ -13,10 +13,10 @@
 #define SALIR 5
 
 
-double calculadora_1(char *host, double num1, double num2, short operacion)
+calc_res calculadora_1(char *host, double num1, double num2, short operacion)
 {
 	CLIENT *clnt;
-	double * resultado;
+	calc_res * resultado;
 	
 #ifndef	DEBUG
 	clnt = clnt_create (host, CALCULADORA, CALC_VER, "tcp");
@@ -81,7 +81,7 @@ int main (int argc, char *argv[])
 	char *host;
 	short opcion;
 	double num1, num2;
-	double resultado;
+	calc_res resultado;
 	// const int MAX_TAM = 255;
 	// char * input[MAX_TAM];
 
@@ -99,7 +99,11 @@ int main (int argc, char *argv[])
 			scanf("%lf %lf", &num1, &num2);
 			//printf("%lf %lf", num1, num2);
 			resultado = calculadora_1 (host, num1, num2, opcion);
-			printf("Resultado: %lf\n", resultado);
+
+			if (resultado.error == 1)
+				printf("%s", "No se puede dividir por 0\n");
+			else
+				printf("Resultado: %lf\n", resultado.calc_res_u.resultado);
 		}
 	} while (opcion != SALIR);
 

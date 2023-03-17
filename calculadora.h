@@ -14,6 +14,14 @@ extern "C" {
 #endif
 
 
+struct calc_res {
+	int error;
+	union {
+		double resultado;
+	} calc_res_u;
+};
+typedef struct calc_res calc_res;
+
 struct suma_1_argument {
 	double arg1;
 	double arg2;
@@ -43,44 +51,46 @@ typedef struct divide_1_argument divide_1_argument;
 
 #if defined(__STDC__) || defined(__cplusplus)
 #define SUMA 1
-extern  double * suma_1(double , double , CLIENT *);
-extern  double * suma_1_svc(double , double , struct svc_req *);
+extern  calc_res * suma_1(double , double , CLIENT *);
+extern  calc_res * suma_1_svc(double , double , struct svc_req *);
 #define RESTA 2
-extern  double * resta_1(double , double , CLIENT *);
-extern  double * resta_1_svc(double , double , struct svc_req *);
+extern  calc_res * resta_1(double , double , CLIENT *);
+extern  calc_res * resta_1_svc(double , double , struct svc_req *);
 #define MULTIPLICA 3
-extern  double * multiplica_1(double , double , CLIENT *);
-extern  double * multiplica_1_svc(double , double , struct svc_req *);
+extern  calc_res * multiplica_1(double , double , CLIENT *);
+extern  calc_res * multiplica_1_svc(double , double , struct svc_req *);
 #define DIVIDE 4
-extern  double * divide_1(double , double , CLIENT *);
-extern  double * divide_1_svc(double , double , struct svc_req *);
+extern  calc_res * divide_1(double , double , CLIENT *);
+extern  calc_res * divide_1_svc(double , double , struct svc_req *);
 extern int calculadora_1_freeresult (SVCXPRT *, xdrproc_t, caddr_t);
 
 #else /* K&R C */
 #define SUMA 1
-extern  double * suma_1();
-extern  double * suma_1_svc();
+extern  calc_res * suma_1();
+extern  calc_res * suma_1_svc();
 #define RESTA 2
-extern  double * resta_1();
-extern  double * resta_1_svc();
+extern  calc_res * resta_1();
+extern  calc_res * resta_1_svc();
 #define MULTIPLICA 3
-extern  double * multiplica_1();
-extern  double * multiplica_1_svc();
+extern  calc_res * multiplica_1();
+extern  calc_res * multiplica_1_svc();
 #define DIVIDE 4
-extern  double * divide_1();
-extern  double * divide_1_svc();
+extern  calc_res * divide_1();
+extern  calc_res * divide_1_svc();
 extern int calculadora_1_freeresult ();
 #endif /* K&R C */
 
 /* the xdr functions */
 
 #if defined(__STDC__) || defined(__cplusplus)
+extern  bool_t xdr_calc_res (XDR *, calc_res*);
 extern  bool_t xdr_suma_1_argument (XDR *, suma_1_argument*);
 extern  bool_t xdr_resta_1_argument (XDR *, resta_1_argument*);
 extern  bool_t xdr_multiplica_1_argument (XDR *, multiplica_1_argument*);
 extern  bool_t xdr_divide_1_argument (XDR *, divide_1_argument*);
 
 #else /* K&R C */
+extern bool_t xdr_calc_res ();
 extern bool_t xdr_suma_1_argument ();
 extern bool_t xdr_resta_1_argument ();
 extern bool_t xdr_multiplica_1_argument ();
