@@ -1,15 +1,18 @@
+const TAM_MSG = 300;
+typedef string msg_error<TAM_MSG>;
+
+const TAM_EXPR_MATEMATICA = 1000;
+typedef string expr_mat<TAM_EXPR_MATEMATICA>; 
+
 union calc_res switch (int error) {
    case 0:
       double resultado; /* Si no hay error devolvemos el resultado */
-   default:
-      void; /* Hay error: en este caso división por 0 */
+   case 1:
+      msg_error msg_error; /* Hay error. El mensaje describe cual*/
 };
 
 program CALCULADORA {
    version CALC_VER {
-      calc_res SUMA(double, double) = 1;
-      calc_res RESTA(double, double) = 2;
-      calc_res MULTIPLICA(double, double) = 3;
-      calc_res DIVIDE(double, double) = 4;
+      calc_res CALCULA(expr_mat) = 1;
    } = 1;
 } = 0x20000001;
