@@ -17,37 +17,16 @@
 #endif
 
 static calc_res *
-_suma_1 (suma_1_argument *argp, struct svc_req *rqstp)
+_calcula_1 (expr_mat  *argp, struct svc_req *rqstp)
 {
-	return (suma_1_svc(argp->arg1, argp->arg2, rqstp));
-}
-
-static calc_res *
-_resta_1 (resta_1_argument *argp, struct svc_req *rqstp)
-{
-	return (resta_1_svc(argp->arg1, argp->arg2, rqstp));
-}
-
-static calc_res *
-_multiplica_1 (multiplica_1_argument *argp, struct svc_req *rqstp)
-{
-	return (multiplica_1_svc(argp->arg1, argp->arg2, rqstp));
-}
-
-static calc_res *
-_divide_1 (divide_1_argument *argp, struct svc_req *rqstp)
-{
-	return (divide_1_svc(argp->arg1, argp->arg2, rqstp));
+	return (calcula_1_svc(*argp, rqstp));
 }
 
 static void
 calculadora_1(struct svc_req *rqstp, register SVCXPRT *transp)
 {
 	union {
-		suma_1_argument suma_1_arg;
-		resta_1_argument resta_1_arg;
-		multiplica_1_argument multiplica_1_arg;
-		divide_1_argument divide_1_arg;
+		expr_mat calcula_1_arg;
 	} argument;
 	char *result;
 	xdrproc_t _xdr_argument, _xdr_result;
@@ -58,28 +37,10 @@ calculadora_1(struct svc_req *rqstp, register SVCXPRT *transp)
 		(void) svc_sendreply (transp, (xdrproc_t) xdr_void, (char *)NULL);
 		return;
 
-	case SUMA:
-		_xdr_argument = (xdrproc_t) xdr_suma_1_argument;
+	case CALCULA:
+		_xdr_argument = (xdrproc_t) xdr_expr_mat;
 		_xdr_result = (xdrproc_t) xdr_calc_res;
-		local = (char *(*)(char *, struct svc_req *)) _suma_1;
-		break;
-
-	case RESTA:
-		_xdr_argument = (xdrproc_t) xdr_resta_1_argument;
-		_xdr_result = (xdrproc_t) xdr_calc_res;
-		local = (char *(*)(char *, struct svc_req *)) _resta_1;
-		break;
-
-	case MULTIPLICA:
-		_xdr_argument = (xdrproc_t) xdr_multiplica_1_argument;
-		_xdr_result = (xdrproc_t) xdr_calc_res;
-		local = (char *(*)(char *, struct svc_req *)) _multiplica_1;
-		break;
-
-	case DIVIDE:
-		_xdr_argument = (xdrproc_t) xdr_divide_1_argument;
-		_xdr_result = (xdrproc_t) xdr_calc_res;
-		local = (char *(*)(char *, struct svc_req *)) _divide_1;
+		local = (char *(*)(char *, struct svc_req *)) _calcula_1;
 		break;
 
 	default:
